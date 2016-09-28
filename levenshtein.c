@@ -20,8 +20,6 @@ levenshtein(char *a, int a_size, char *b, int b_size)
 
     unsigned int ia = 0;
     unsigned int ib = 0;
-    unsigned int da;
-    unsigned int db;
     unsigned int d;
 
     while (ia < a_size) {
@@ -31,11 +29,13 @@ levenshtein(char *a, int a_size, char *b, int b_size)
 
     while (ib < b_size) {
         char c = b[ib];
-        d = da = ib++;
+        unsigned int da = ib++;
+
+        d = da;
         ia = -1;
 
         while (++ia < a_size) {
-            db = (c == a[ia]) ? da : da + 1;
+            unsigned int db = (c == a[ia]) ? da : da + 1;
             da = m[ia];
 
             m[ia] = d = (da > d)
