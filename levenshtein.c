@@ -14,6 +14,9 @@ levenshtein(char *a, int a_size, char *b, int b_size)
     }
 
     unsigned int *m = calloc(a_size, sizeof(unsigned int));
+    if (m == NULL) {
+        return -1;
+    }
 
     unsigned int ia = 0;
     unsigned int ib = 0;
