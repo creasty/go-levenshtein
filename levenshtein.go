@@ -3,7 +3,9 @@ package levenshtein
 /*
 #cgo CFLAGS: -I .
 
-#include <stdlib.h>
+#include <stdint.h>
+#include <stddef.h>
+
 #include "levenshtein.h"
 */
 import "C"
@@ -13,12 +15,25 @@ import (
 )
 
 func Distance(a, b string) int {
-	ca := C.CString(a)
-	defer C.free(unsafe.Pointer(ca))
+	if a == b {
+		return 0
+	}
 
-	cb := C.CString(b)
-	defer C.free(unsafe.Pointer(cb))
+	aRune := []rune(a)
+	bRune := []rune(b)
+	aLen := len(aRune)
+	bLen := len(bRune)
 
-	cdist := C.levenshtein(ca, C.int(len(a)), cb, C.int(len(b)))
+	if aLen == 0 {
+		return bLen
+	}
+	if bLen == 0 {
+		return aLen
+	}
+
+	ca := (*C.int32_t)(unsafe.Pointer(&aRune[0]))
+	cb := (*C.int32_t)(unsafe.Pointer(&bRune[0]))
+
+	cdist := C.levenshtein(ca, C.size_t(len(aRune)), cb, C.size_t(len(bRune)))
 	return int(cdist)
 }

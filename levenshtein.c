@@ -1,19 +1,10 @@
-#include <stdlib.h>
+#include <stddef.h>
 #include <stdint.h>
+#include <stdlib.h>
 
 unsigned int
-levenshtein(int32_t *a, int a_size, int32_t *b, int b_size)
+levenshtein(int32_t *a, size_t a_size, int32_t *b, size_t b_size)
 {
-    if (a == b) {
-        return 0;
-    }
-    if (a_size == 0) {
-        return b_size;
-    }
-    if (b_size == 0) {
-        return a_size;
-    }
-
     unsigned int *m = calloc(a_size, sizeof(unsigned int));
     if (m == NULL) {
         return -1;
