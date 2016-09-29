@@ -4,6 +4,19 @@ go-levenshtein
 Levenshtein algorithm in Golang (with C ext)
 
 
+Usage
+-----
+
+```go
+levenshtein.Distance("kitten", "sitting")
+=> 3
+
+// Multibyte string support
+levenshtein.Distance("あいうえお", "aいうえo")
+=> 2
+```
+
+
 License
 -------
 
