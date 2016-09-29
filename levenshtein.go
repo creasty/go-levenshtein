@@ -31,9 +31,9 @@ func Distance(a, b string) int {
 		return aLen
 	}
 
-	ca := (*C.int32_t)(unsafe.Pointer(&aRune[0]))
-	cb := (*C.int32_t)(unsafe.Pointer(&bRune[0]))
+	aPtr := (*C.int32_t)(unsafe.Pointer(&aRune[0]))
+	bPtr := (*C.int32_t)(unsafe.Pointer(&bRune[0]))
 
-	cdist := C.levenshtein(ca, C.size_t(len(aRune)), cb, C.size_t(len(bRune)))
+	cdist := C.levenshtein(aPtr, C.size_t(aLen), bPtr, C.size_t(bLen))
 	return int(cdist)
 }
