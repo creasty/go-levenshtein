@@ -10,33 +10,26 @@ levenshtein(int32_t *a, size_t a_size, int32_t *b, size_t b_size)
         return -1;
     }
 
-    unsigned int ia = 0;
-    unsigned int ib = 0;
-    unsigned int d;
+    unsigned int result, i, j, d, t;
 
-    while (ia < a_size) {
-        m[ia] = ia + 1;
-        ia++;
+    for (i = 0; i < a_size; i++) {
+        m[i] = i + 1;
     }
 
-    while (ib < b_size) {
-        int32_t c = b[ib];
-        unsigned int da = ib++;
+    for (i = 0; i < b_size; i++) {
+        result = d = i;
 
-        d = da;
-        ia = -1;
+        for (j = 0; j < a_size; j++) {
+            t = (b[i] == a[j]) ? d : d + 1;
+            d = m[j];
 
-        while (++ia < a_size) {
-            unsigned int db = (c == a[ia]) ? da : da + 1;
-            da = m[ia];
-
-            m[ia] = d = (da > d)
-                ? (db > d ? d + 1 : db)
-                : (db > da ? da + 1 : db);
+            m[j] = result = (d > result)
+                ? (t > result ? result + 1 : t)
+                : (t > d ? d + 1 : t);
         }
     }
 
     free(m);
 
-    return d;
+    return result;
 }
