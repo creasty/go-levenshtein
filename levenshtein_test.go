@@ -26,3 +26,9 @@ func TestDistance(t *testing.T) {
 		}
 	}
 }
+
+func BenchmarkDistance(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		Distance("あいうえお levenshtein", "aiueo frankenstein")
+	}
+}
