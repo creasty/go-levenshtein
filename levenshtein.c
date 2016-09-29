@@ -1,7 +1,8 @@
 #include <stdlib.h>
+#include <stdint.h>
 
-int
-levenshtein(char *a, int a_size, char *b, int b_size)
+unsigned int
+levenshtein(int32_t *a, int a_size, int32_t *b, int b_size)
 {
     if (a == b) {
         return 0;
@@ -28,7 +29,7 @@ levenshtein(char *a, int a_size, char *b, int b_size)
     }
 
     while (ib < b_size) {
-        char c = b[ib];
+        int32_t c = b[ib];
         unsigned int da = ib++;
 
         d = da;
