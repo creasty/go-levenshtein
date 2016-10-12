@@ -33,7 +33,7 @@ func BenchmarkDistance(b *testing.B) {
 	}
 }
 
-func TestLcsDistance(t *testing.T) {
+func TestLcsLen(t *testing.T) {
 	samples := map[[2]string]int{
 		[2]string{"", ""}:                        0,
 		[2]string{"", "a"}:                       0,
@@ -49,7 +49,7 @@ func TestLcsDistance(t *testing.T) {
 	}
 
 	for pair, expect := range samples {
-		actual := LcsDistance(pair[0], pair[1])
+		actual := LcsLen(pair[0], pair[1])
 		if actual != expect {
 			t.Errorf("Expected the distance of `%s` and `%s` to be %d, but was %d", pair[0], pair[1], expect, actual)
 		}

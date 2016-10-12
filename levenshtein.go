@@ -38,7 +38,7 @@ func Distance(a, b string) int {
 	return int(cdist)
 }
 
-func LcsDistance(a, b string) int {
+func LcsLen(a, b string) int {
 	aRune := []rune(a)
 	bRune := []rune(b)
 	aLen := len(aRune)

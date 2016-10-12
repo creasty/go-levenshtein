@@ -16,6 +16,15 @@ levenshtein.Distance("あいうえお", "aいうえo")
 => 2
 ```
 
+```go
+levenshtein.LcsLen("kitten", "sitting")
+=> 4
+
+// Multibyte string support
+levenshtein.LcsLen("あいうえお", "aいうえo")
+=> 3
+```
+
 
 License
 -------
