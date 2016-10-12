@@ -37,3 +37,23 @@ func Distance(a, b string) int {
 	cdist := C.levenshtein(aPtr, C.size_t(aLen), bPtr, C.size_t(bLen))
 	return int(cdist)
 }
+
+func LcsDistance(a, b string) int {
+	aRune := []rune(a)
+	bRune := []rune(b)
+	aLen := len(aRune)
+	bLen := len(bRune)
+
+	if aLen == 0 {
+		return 0
+	}
+	if bLen == 0 {
+		return 0
+	}
+
+	aPtr := (*C.int32_t)(unsafe.Pointer(&aRune[0]))
+	bPtr := (*C.int32_t)(unsafe.Pointer(&bRune[0]))
+
+	cdist := C.lcs_len(aPtr, C.size_t(aLen), bPtr, C.size_t(bLen))
+	return int(cdist)
+}

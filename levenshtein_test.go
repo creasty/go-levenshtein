@@ -32,3 +32,26 @@ func BenchmarkDistance(b *testing.B) {
 		Distance("あいうえお levenshtein", "aiueo frankenstein")
 	}
 }
+
+func TestLcsDistance(t *testing.T) {
+	samples := map[[2]string]int{
+		[2]string{"", ""}:                        0,
+		[2]string{"", "a"}:                       0,
+		[2]string{"a", ""}:                       0,
+		[2]string{"a", "a"}:                      1,
+		[2]string{"a", "b"}:                      0,
+		[2]string{"kitten", "sitting"}:           4,
+		[2]string{"example", "samples"}:          5,
+		[2]string{"creasty", "Creasty"}:          6,
+		[2]string{"levenshtein", "frankenstein"}: 7,
+		[2]string{"distance", "difference"}:      5,
+		[2]string{"あいうえお", "aいうえo"}:              3,
+	}
+
+	for pair, expect := range samples {
+		actual := LcsDistance(pair[0], pair[1])
+		if actual != expect {
+			t.Errorf("Expected the distance of `%s` and `%s` to be %d, but was %d", pair[0], pair[1], expect, actual)
+		}
+	}
+}
