@@ -1,6 +1,8 @@
 go-levenshtein
 ==============
 
+[![Build Status](https://travis-ci.org/creasty/go-levenshtein.svg?branch=master)](https://travis-ci.org/creasty/go-levenshtein)
+
 Levenshtein algorithm in Golang (with C ext)
 
 
